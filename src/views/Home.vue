@@ -54,7 +54,7 @@ export default {
         this.loading = true;
         let data = await movieService.getMovies({ page: this.page, sort_by: 'popularity.desc' });
         this.movies = [...this.movies, ...data.results];
-        this.total_pages = data.total_results;
+        this.total_pages = data.total_pages;
         this.loading = false;
       } catch (error) {
         this.loading = false;
@@ -70,7 +70,7 @@ export default {
           sort_by: 'popularity.desc',
         });
         this.movies = [...this.movies, ...data.results];
-        this.total_pages = data.total_results;
+        this.total_pages = data.total_pages;
         this.loading = false;
       } catch (error) {
         this.loading = false;
