@@ -10,6 +10,7 @@
       </div>
     </div>
     <app-loader v-if="loading" />
+    <h2 style="text-align:center;color:#fff" v-if="!loading && !movies.length">No movies for this query: "{{ query }}"</h2>
   </div>
 </template>
 
