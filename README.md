@@ -1,5 +1,6 @@
 # vue-movies
 1. Simple Vue App to list and search movies 
+
 ![Ejemplo de imagen](http://vue-movies-catalog.surge.sh/share.jpeg)
 ## Project setup
 ```
