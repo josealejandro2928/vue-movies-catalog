@@ -15,8 +15,9 @@
       >
     </div>
     <div class="overview">
-      <h3>Overview</h3>
-      {{ movie.overview }}
+      <h3>{{ movie.title }}</h3>
+      <h4>Overview:</h4>
+      {{ movie.overview | cropWords(500)}}
     </div>
   </div>
 </template>
@@ -27,6 +28,11 @@ export default {
     movie: {
       type: Object,
       required: true,
+    },
+  },
+  filters: {
+    cropWords(str, length) {
+      return str.length <= length ? str : str.substring(0, length - 3) + '...';
     },
   },
 };
@@ -55,7 +61,7 @@ export default {
     justify-content: space-between;
     padding: 0.5rem 1rem 1rem;
     letter-spacing: 0.5px;
-    h3{
+    h3 {
       margin: 0px;
     }
     .rating {
@@ -76,7 +82,7 @@ export default {
   }
   .overview {
     background-color: #fff;
-    padding: 2rem;
+    padding: 1rem 2rem;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -84,9 +90,13 @@ export default {
     max-height: 100%;
     transform: translateY(101%);
     transition: transform 0.3s ease;
+    h4 {
+      margin: 4px 0px;
+      opacity: 0.8;
+    }
   }
-  &:hover{
-    .overview{
+  &:hover {
+    .overview {
       transform: translateY(0%);
     }
   }

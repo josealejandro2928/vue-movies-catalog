@@ -17,5 +17,6 @@ module.exports = {
     'no-plusplus': 'off',
     'max-len': 'off',
     'import/order': 'off',
+    'prefer-template': 'off',
   },
 };
