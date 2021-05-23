@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <app-header></app-header>
+  <div>
+    <app-header @search="onSearch($event)"></app-header>
     <div class="main">
       <app-movie :movie="movie" v-for="(movie, index) of movies" :key="index" />
       <div class="load-more">
@@ -31,6 +31,7 @@ export default {
       page: 1,
       total_pages: 2,
       loading: true,
+      query: '',
     };
   },
   components: {
@@ -41,18 +42,48 @@ export default {
   methods: {
     onLoadMore() {
       this.page++;
-      this.getMovies();
+      if (!this.query) {
+        this.getMovies();
+      } else {
+        this.getSearchMovie();
+      }
     },
     async getMovies() {
       try {
         this.loading = true;
-        let data = await movieService.getMovies({ page: this.page });
+        let data = await movieService.getMovies({ page: this.page, sort_by: 'popularity.desc' });
         this.movies = [...this.movies, ...data.results];
         this.total_pages = data.total_results;
         this.loading = false;
       } catch (error) {
         this.loading = false;
         alert(error.message);
+      }
+    },
+    async getSearchMovie() {
+      try {
+        this.loading = true;
+        let data = await movieService.searchMovies({
+          page: this.page,
+          query: this.query,
+          sort_by: 'popularity.desc',
+        });
+        this.movies = [...this.movies, ...data.results];
+        this.total_pages = data.total_results;
+        this.loading = false;
+      } catch (error) {
+        this.loading = false;
+        alert(error.message);
+      }
+    },
+    async onSearch(text) {
+      this.query = text;
+      this.movies = [];
+      this.page = 1;
+      if (this.query) {
+        this.getSearchMovie();
+      } else {
+        this.getMovies();
       }
     },
   },

@@ -19,5 +19,20 @@ async function getMovies(params = { page: 1 }) {
   });
   return data;
 }
+async function searchMovies(params = { page: 1 }) {
+  const response = await axios.get(SEARCH_URL, {
+    params: {
+      ...params,
+      api_key: '4c8bc95958dd9c067669abb351d5bd28',
+    },
+  });
+  let { data } = response;
+  data.results = data.results.map(element => {
+    element.image = `${IMAGE_URL}${element.poster_path}`;
+    element.rating = element.vote_average;
+    return element;
+  });
+  return data;
+}
 
-export default { getMovies };
+export default { getMovies, searchMovies };

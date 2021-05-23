@@ -1,14 +1,34 @@
 <template>
   <div class="header">
-    <img class="logo" src="../assets/logo.png" />
+    <div class="logo-container">
+      <img class="logo" src="../assets/logo.png" />
+      <h3>Vue Movies Catalog</h3>
+    </div>
     <div class="form">
-      <input type="search" placeholder="Search..." class="search" />
+      <input
+        v-model="text"
+        @change="onSearch()"
+        type="search"
+        placeholder="Search..."
+        class="search"
+      />
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      text: '',
+    };
+  },
+  methods: {
+    onSearch() {
+      this.$emit('search', this.text);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -18,9 +38,19 @@ export default {};
   justify-content: space-between;
   align-items: center;
   background-color: var(--secundary-color);
-  .logo {
-    height: 40px;
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .logo {
+      height: 40px;
+    }
+    h3 {
+      color: #fff;
+      margin: 0px 16px;
+    }
   }
+
   .search {
     background-color: transparent;
     border: 2px solid var(--primary-color);

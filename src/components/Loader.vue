@@ -21,7 +21,7 @@ export default {
 
 <style lang="scss" scoped>
 .progress-container {
-  position: absolute;
+  position: fixed;
   z-index: 8888;
   left: 0;
   top: 0;
