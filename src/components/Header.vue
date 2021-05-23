@@ -2,7 +2,7 @@
   <div class="header">
     <div class="logo-container">
       <img class="logo" src="../assets/logo.png" />
-      <h3>Vue Movies Catalog</h3>
+      <h3>Vue: Movies Catalogue</h3>
     </div>
     <div class="form">
       <input v-model="text" @change="onSearch()" type="search" placeholder="Search..." class="search" />
