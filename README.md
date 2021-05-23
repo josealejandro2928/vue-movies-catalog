@@ -1,5 +1,5 @@
 # vue-movies
-
+ 1. # Simple Vue App to list and search movies 
 ## Project setup
 ```
 npm install
