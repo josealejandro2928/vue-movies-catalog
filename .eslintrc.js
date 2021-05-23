@@ -15,6 +15,7 @@ module.exports = {
     'no-unused-vars': 'off',
     'prefer-const': 'off',
     'no-plusplus': 'off',
-    "max-len":"off"
+    'max-len': 'off',
+    'import/order': 'off',
   },
 };

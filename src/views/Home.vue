@@ -2,15 +2,17 @@
   <div>
     <app-header @search="onSearch($event)"></app-header>
     <div class="main">
-      <app-movie :movie="movie" v-for="(movie, index) of movies" :key="index" />
+      <app-movie :movie="movie" v-for="(movie, index) of sliceArray(movies)" :key="index" />
       <div class="load-more">
         <button @click="onLoadMore()" v-if="page < total_pages" :disabled="loading">
-          Load more...
+          {{ 'Load more...' }}
         </button>
       </div>
     </div>
     <app-loader v-if="loading" />
-    <h2 style="text-align:center;color:#fff" v-if="!loading && !movies.length">No movies for this query: "{{ query }}"</h2>
+    <h2 style="text-align:center;color:#fff" v-if="!loading && !movies.length">
+      No movies for this query: "{{ query }}"
+    </h2>
   </div>
 </template>
 
@@ -40,6 +42,7 @@ export default {
     'app-movie': Movie,
     'app-loader': Loader,
   },
+
   methods: {
     onLoadMore() {
       this.page++;
@@ -47,6 +50,16 @@ export default {
         this.getMovies();
       } else {
         this.getSearchMovie();
+      }
+    },
+    async onSearch(text) {
+      this.query = text;
+      this.movies = [];
+      this.page = 1;
+      if (this.query) {
+        this.getSearchMovie();
+      } else {
+        this.getMovies();
       }
     },
     async getMovies() {
@@ -77,15 +90,8 @@ export default {
         alert(error.message);
       }
     },
-    async onSearch(text) {
-      this.query = text;
-      this.movies = [];
-      this.page = 1;
-      if (this.query) {
-        this.getSearchMovie();
-      } else {
-        this.getMovies();
-      }
+    sliceArray(array = [], limit = 0) {
+      return limit ? array.slice(0, limit) : array;
     },
   },
   ////////// Hooks /////////

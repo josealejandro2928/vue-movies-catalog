@@ -5,13 +5,7 @@
       <h3>Vue Movies Catalog</h3>
     </div>
     <div class="form">
-      <input
-        v-model="text"
-        @change="onSearch()"
-        type="search"
-        placeholder="Search..."
-        class="search"
-      />
+      <input v-model="text" @change="onSearch()" type="search" placeholder="Search..." class="search" />
     </div>
   </div>
 </template>
@@ -48,6 +42,11 @@ export default {
     h3 {
       color: #fff;
       margin: 0px 16px;
+    }
+    @media (max-width: 599px) {
+      h3 {
+        display: none;
+      }
     }
   }
 
