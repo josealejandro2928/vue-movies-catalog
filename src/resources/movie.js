@@ -11,6 +11,7 @@ async function getMovies(params = { page: 1 }) {
     },
   });
   let { data } = response;
+  data.results = data.results.filter(element => element.vote_average > 0 && element.poster_path);
   data.results = data.results.map(element => {
     element.image = `${IMAGE_URL}${element.poster_path}`;
     element.rating = element.vote_average;
@@ -25,6 +26,7 @@ async function searchMovies(params = { page: 1 }) {
     },
   });
   let { data } = response;
+  data.results = data.results.filter(element => element.vote_average > 0 && element.poster_path);
   data.results = data.results.map(element => {
     element.image = `${IMAGE_URL}${element.poster_path}`;
     element.rating = element.vote_average;
